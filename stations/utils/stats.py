@@ -2,6 +2,15 @@ import plotly.graph_objects as go
 
 
 def calculate_statistics_per_city(stations):
+    """
+    Calculates statistics per city based on the station data.
+
+    Args:
+        stations (List[Dict]): List of station data.
+
+    Returns:
+        Dict: Statistics per city.
+    """
     stats_per_city = {}
 
     for station in stations:
@@ -37,7 +46,44 @@ def calculate_statistics_per_city(stations):
     return stats_per_city
 
 
+def create_bar_chart(x_values, y_values, bar_names, title, xaxis_title, yaxis_title):
+    """
+    Creates a bar chart using Plotly.
+
+    Args:
+        x_values (List): List of x-axis values.
+        y_values (List): List of y-axis values.
+        bar_names (List): List of names for each bar.
+        title (str): Chart title.
+        xaxis_title (str): x-axis label.
+        yaxis_title (str): y-axis label.
+
+    Returns:
+        str: HTML representation of the chart.
+    """
+    fig = go.Figure()
+    for x, y, name in zip(x_values, y_values, bar_names):
+        fig.add_trace(go.Bar(x=x, y=y, name=name))
+
+    fig.update_layout(barmode='stack')
+    fig.update_layout(title=title)
+    fig.update_layout(xaxis_title=xaxis_title, yaxis_title=yaxis_title)
+
+    chart_html = fig.to_html(full_html=False)
+
+    return chart_html
+
+
 def plot_bike_distribution(stats_per_city):
+    """
+    Plots the bike distribution per city.
+
+    Args:
+        stats_per_city (Dict): Statistics per city.
+
+    Returns:
+        str: HTML representation of the chart.
+    """
     cities = []
     electrical_bikes = []
     mechanical_bikes = []
@@ -47,26 +93,28 @@ def plot_bike_distribution(stats_per_city):
         electrical_bikes.append(stats['electrical_bikes'])
         mechanical_bikes.append(stats['mechanical_bikes'])
 
-    # Créer le diagramme en barres superposées
-    fig = go.Figure()
-    fig.add_trace(go.Bar(x=cities, y=electrical_bikes, name='Vélos électriques'))
-    fig.add_trace(go.Bar(x=cities, y=mechanical_bikes, name='Vélos mécaniques'))
+    chart_html = create_bar_chart(
+        x_values=[cities, cities],
+        y_values=[electrical_bikes, mechanical_bikes],
+        bar_names=['Vélos électriques', 'Vélos mécaniques'],
+        title='Répartition des vélos disponibles selon le type et la ville',
+        xaxis_title='Villes',
+        yaxis_title='Nombre de vélos'
+    )
 
-    # Configurer le paramètre barmode pour superposer les barres
-    fig.update_layout(barmode='stack')
-
-    fig.update_layout(title='Répartition des vélos disponibles selon le type et la ville')
-
-    # Ajouter des labels aux axes
-    fig.update_layout(xaxis_title='Villes', yaxis_title='Nombre de vélos')
-
-    # Convertir le diagramme en HTML
-    diagram_html = fig.to_html(full_html=False)
-
-    return diagram_html
+    return chart_html
 
 
 def plot_station_status(stats_per_city):
+    """
+    Plots the station status (open/closed) per city.
+
+    Args:
+        stats_per_city (Dict): Statistics per city.
+
+    Returns:
+        str: HTML representation of the chart.
+    """
     cities = []
     open_stations = []
     closed_stations = []
@@ -76,27 +124,28 @@ def plot_station_status(stats_per_city):
         open_stations.append(stats['open_stations'])
         closed_stations.append(stats['closed_stations'])
 
-    # Créer le diagramme en barres superposées
-    fig = go.Figure()
-    fig.add_trace(go.Bar(x=cities, y=open_stations, name='Stations ouvertes'))
-    fig.add_trace(go.Bar(x=cities, y=closed_stations, name='Stations fermées'))
+    chart_html = create_bar_chart(
+        x_values=[cities, cities],
+        y_values=[open_stations, closed_stations],
+        bar_names=['Stations ouvertes', 'Stations fermées'],
+        title='Répartition des stations ouvertes et fermées par ville',
+        xaxis_title='Villes',
+        yaxis_title='Nombre de stations'
+    )
 
-    # Configurer le paramètre barmode pour superposer les barres
-    fig.update_layout(barmode='stack')
-
-    # Ajouter des labels aux axes
-    fig.update_layout(xaxis_title='Villes', yaxis_title='Nombre de stations')
-
-    # Ajouter un titre au diagramme
-    fig.update_layout(title='Répartition des stations ouvertes et fermées par ville')
-
-    # Convertir le diagramme en HTML
-    diagram_html = fig.to_html(full_html=False)
-
-    return diagram_html
+    return chart_html
 
 
-def stations_with_banking_chart(stats_per_city):
+def plot_stations_with_banking(stats_per_city):
+    """
+    Plots the distribution of stations with and without banking per city.
+
+    Args:
+        stats_per_city (Dict): Statistics per city.
+
+    Returns:
+        str: HTML representation of the chart.
+    """
     labels = ['Stations avec terminal de paiement', 'Stations sans terminal de paiement']
     values = [0, 0]
 
@@ -111,5 +160,5 @@ def stations_with_banking_chart(stats_per_city):
         showlegend=True
     )
 
-    pie_html = fig.to_html(full_html=False)
-    return pie_html
+    chart_html = fig.to_html(full_html=False)
+    return chart_html

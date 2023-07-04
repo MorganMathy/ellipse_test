@@ -1,9 +1,9 @@
 import os
 import aiohttp
-import datetime
+
 from dotenv import load_dotenv
-from django.core.cache import cache
-from django.views.decorators.cache import cache_page
+
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -13,7 +13,6 @@ api_key = os.getenv("API_KEY")
 
 # Base URL for the API
 API_URL = "https://api.jcdecaux.com/vls/v3"
-CACHE_KEY = "stations_data"
 
 
 async def get_contracts():
@@ -26,12 +25,16 @@ async def get_contracts():
     url = f"{API_URL}/contracts"
     params = {"apiKey": api_key}
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params) as response:
-            contracts = await response.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                contracts = await response.json()
 
-    return contracts
-
+        return contracts
+    except Exception as e:
+        # Handle exceptions and log the error
+        print("Error fetching contracts:", str(e))
+        return []
 
 async def get_stations_from_contract(contract_name):
     """
@@ -46,11 +49,16 @@ async def get_stations_from_contract(contract_name):
     url = f"{API_URL}/stations"
     params = {"apiKey": api_key, "contract": contract_name}
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params) as response:
-            stations = await response.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                stations = await response.json()
 
-    return stations
+        return stations
+    except Exception as e:
+        # Handle exceptions and log the error
+        print(f"Error fetching stations for contract {contract_name}:", str(e))
+        return []
 
 
 async def get_all_stations():
@@ -59,17 +67,20 @@ async def get_all_stations():
 
     Returns:
         List: A list of all stations.
-    """    
+    """
     url = f"{API_URL}/stations"
-    params = {
-        "apiKey": api_key,
-    }
+    params = {"apiKey": api_key}
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params) as response:
-            stations = await response.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                stations = await response.json()
 
-    return stations
+        return stations
+    except Exception as e:
+        # Handle exceptions and log the error
+        print("Error fetching all stations:", str(e))
+        return []
 
 
 async def get_station_details(contract_name, station_id):
@@ -86,8 +97,13 @@ async def get_station_details(contract_name, station_id):
     url = f"{API_URL}/stations/{station_id}"
     params = {"apiKey": api_key, "contract": contract_name}
 
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params) as response:
-            station_details = await response.json()
+    try:
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                station_details = await response.json()
 
-    return station_details
+        return station_details
+    except Exception as e:
+        # Handle exceptions and log the error
+        print(f"Error fetching details for station {station_id} in contract {contract_name}:", str(e))
+        return {}
