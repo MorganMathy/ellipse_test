@@ -3,7 +3,7 @@ import aiohttp
 import datetime
 from dotenv import load_dotenv
 from django.core.cache import cache
-
+from django.views.decorators.cache import cache_page
 
 # Load environment variables from .env file
 load_dotenv()

@@ -1,11 +1,23 @@
 {% extends 'partials/base.html' %} 
 
-{% block title %}Carte{% endblock %} 
+{% block title %}Statistiques{% endblock %} 
 
 {% block content %}
 <div class="container">
   <div class="row mt-4">
-    <div class="col-md-10 offset-md-1">stats</div>
+    <div class="col-md-10 offset-md-1">
+      <div class="stats-container">
+        <div class="chart">
+          {{ bike_distribution_html|safe }}
+        </div>
+        <div class="chart">
+          {{ station_status_html|safe }}
+        </div>
+        <div class="chart">
+          {{ stations_banking_html|safe }}
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
