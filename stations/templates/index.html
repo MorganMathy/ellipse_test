@@ -3,14 +3,23 @@
 {% block title %}Accueil{% endblock %} 
 
 {% block content %}
+{% load static %}
+
+<style>
+  .image-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-md-10 offset-md-1">
-      <h1>Lorem</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam mattis sodales enim, non volutpat velit pellentesque ut. Morbi et mi nisi. Fusce rhoncus quam eget risus ullamcorper scelerisque. Sed at aliquet lorem. Curabitur vestibulum rutrum tellus, vel consequat neque efficitur ac. Proin non hendrerit ex, in fringilla elit. Curabitur sit amet volutpat est. Ut nec bibendum leo.</p>
-      <p>Phasellus interdum, mauris sed consequat viverra, nunc lectus dapibus ipsum, ut feugiat metus purus ac justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer in dui felis. Morbi sodales tellus nec dapibus viverra. Nunc ultrices interdum tristique. Nulla facilisi. Sed pretium cursus velit, eu dapibus erat aliquet nec. Aliquam non laoreet felis.</p>
-      <p>Donec id elementum ipsum. Duis dapibus, arcu ut consequat tristique, nibh sem condimentum magna, at tincidunt nisl nisi a velit. Nulla dignissim, nulla eu luctus malesuada, eros risus accumsan risus, vitae dictum erat metus nec tellus. Sed consectetur ipsum vel urna congue bibendum. Mauris luctus semper arcu, vitae iaculis quam facilisis vel. Sed cursus libero euismod, suscipit nisl non, placerat quam. Proin cursus tempor lectus, sed dictum justo. Integer sagittis nibh lacus, sed semper ligula finibus eu.</p>
-    </div>
+  
+  <div class="col-md-12 image-container">
+    
+    <img src="{% static 'velo.gif' %}" alt="MR. Bean qui fait du vélo" class="img-fluid">
   </div>
 </div>
 {% endblock %}

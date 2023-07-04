@@ -87,7 +87,7 @@ def plot_bike_distribution(stats_per_city):
     cities = []
     electrical_bikes = []
     mechanical_bikes = []
-
+    
     for city, stats in stats_per_city.items():
         cities.append(city)
         electrical_bikes.append(stats['electrical_bikes'])

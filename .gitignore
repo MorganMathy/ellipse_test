@@ -15,3 +15,6 @@
 
 # Exclude virtual environment
 env/
+
+# Exclude JetBrains IDE specific files
+.idea
