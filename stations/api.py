@@ -1,6 +1,9 @@
 import os
 import aiohttp
+import datetime
 from dotenv import load_dotenv
+from django.core.cache import cache
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -10,6 +13,7 @@ api_key = os.getenv("API_KEY")
 
 # Base URL for the API
 API_URL = "https://api.jcdecaux.com/vls/v3"
+CACHE_KEY = "stations_data"
 
 
 async def get_contracts():
@@ -55,7 +59,7 @@ async def get_all_stations():
 
     Returns:
         List: A list of all stations.
-    """
+    """    
     url = f"{API_URL}/stations"
     params = {
         "apiKey": api_key,
