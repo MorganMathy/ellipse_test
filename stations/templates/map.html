@@ -4,8 +4,15 @@
 
 {% block content %}
 <div class="container">
-  <div class="row mt-4">
-    <div class="col-md-10 offset-md-1">{{ map|safe }}</div>
+    <div class="row mt-4">
+      <div class="col-md-10 offset-md-1">{{ map|safe }}</div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-10 offset-md-1">
+        <form method="get" action="{% url 'map' %}">
+          <button type="submit" name="refresh" class="btn btn-primary">Rafraîchir les données</button>
+        </form>
+      </div>
+    </div>
   </div>
-</div>
 {% endblock %}
