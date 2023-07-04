@@ -1,0 +1,17 @@
+# Exclude .env file
+.env
+
+# Exclude all __pycache__ directories
+**/__pycache__/
+
+# Exclude compiled Python files
+*.pyc
+
+# Exclude Visual Studio Code specific files
+.vscode/
+
+# Exclude SQLite database file
+*.sqlite3
+
+# Exclude virtual environment
+env/
