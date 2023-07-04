@@ -30,7 +30,7 @@ async def stats(request):
     stats_per_city = cache.get('stats_per_city')
     last_update = cache.get('last_update')
 
-    if not stats_per_city or last_update is None:
+    if stats_per_city is None or last_update is None:
         asyncio.create_task(update_statistics())
         last_update = cache.get('last_update')
         stats_per_city = cache.get('stats_per_city')
@@ -62,7 +62,7 @@ async def update_stats_endpoint(request):
         # Call the update_statistics() function here
         await update_statistics()
 
-        # Optionally, you can redirect to the stats page or render a success message
+        # Optionally, redirect to the stats page 
         return redirect('stats')
 
     # Render the stats page if accessed via GET request
