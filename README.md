@@ -8,9 +8,9 @@ The project is a Python-based application that displays a real-time map of bike 
 
 Key Features:
 
-Real-time bike station data: The application fetches live data about bike stations, including their locations and availability.
-Interactive map visualization: The data is displayed on an interactive map, allowing users to explore bike stations and their details.
-Statistical analysis: The application calculates and presents statistics based on the bike station data, such as station usage, bike availability, and more.
+- Real-time bike station data: The application fetches live data about bike stations, including their locations and availability.
+- Interactive map visualization: The data is displayed on an interactive map, allowing users to explore bike stations and their details.
+- Statistical analysis: The application calculates and presents statistics based on the bike station data, such as station usage, bike availability, and more.
 
 ## Technologies used
 The project utilizes the following technologies:
