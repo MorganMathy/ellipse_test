@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render
 from django.core.cache import cache
 from django.views.decorators.cache import cache_page
 
-from stations.api import get_all_stations
+
 from stations.utils.map import create_map
 from stations.utils.stats import plot_bike_distribution, plot_station_status, plot_stations_with_banking
 from stations.utils.tasks import update_statistics
@@ -31,7 +31,7 @@ async def stats(request):
     last_update = cache.get('last_update')
 
     if stats_per_city is None or last_update is None:
-        asyncio.create_task(update_statistics())
+        await update_statistics()
         last_update = cache.get('last_update')
         stats_per_city = cache.get('stats_per_city')
 

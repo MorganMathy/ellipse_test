@@ -14,4 +14,6 @@ async def update_statistics():
     cache.set('stats_per_city', stats_per_city) 
     cache.set('last_update', datetime.now())
 
+    return stats_per_city
+
 asyncio.run(update_statistics())

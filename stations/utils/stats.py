@@ -1,6 +1,7 @@
 import plotly.graph_objects as go
 
 
+
 def calculate_statistics_per_city(stations):
     """
     Calculates statistics per city based on the station data.
