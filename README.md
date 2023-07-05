@@ -35,8 +35,10 @@ cd ellipse_test/
 
 ### 2. Create a virtual environment (optional but recommended): 
 ```bash
-python3 -m venv env and activate it.
+python3 -m venv env 
 ```
+Activate it 
+
 
 ### 3. Install dependencies: 
 ```bash
