@@ -18,6 +18,7 @@ The project utilizes the following technologies:
 - Python: A versatile programming language used for scripting and data analysis.
 - Django: A high-level Python web framework for developing web applications.
 - Folium: A Python library for visualizing geospatial data on interactive maps.
+- Plotly : A Python library for creating interactive visualizations, including charts and diagrams. It provides advanced interactivity and customization features.
 - dotenv: A Python library for managing environment variables.
 - Other relevant libraries and frameworks as required.
 
